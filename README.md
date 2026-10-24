@@ -87,6 +87,7 @@ kubectl -n portfolio rollout status deployment/portfolio
 
 Die Seite setzt keine Cookies, nutzt kein Tracking und lädt keine Ressourcen von Drittanbietern.
 Schriften sind über [Fontsource](https://fontsource.org) gebündelt, nginx schreibt keine Access-Logs.
+Die Domain läuft über den Cloudflare-Proxy; das ist in der Datenschutzerklärung beschrieben.
 
 ## Assets neu erzeugen
 

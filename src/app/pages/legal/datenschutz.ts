@@ -6,8 +6,9 @@ import { legal, site } from '../../data/portfolio.data';
 /**
  * Datenschutzerklärung passend zum tatsächlichen Aufbau der Seite:
  * eigener Server in Deutschland, keine Access-Logs, keine Cookies, kein Tracking,
- * keine externen Dienste (Schriften, Bilder und Skripte kommen alle vom eigenen Server).
- * Wenn sich daran etwas ändert (z. B. Analytics, eingebettete Videos, CDN), muss dieser Text angepasst werden.
+ * Cloudflare als vorgeschalteter Proxy, sonst keine externen Dienste (Schriften, Bilder und Skripte
+ * kommen alle vom eigenen Server). Ändert sich daran etwas (z. B. Analytics, eingebettete Videos),
+ * muss dieser Text angepasst werden.
  */
 @Component({
   selector: 'app-datenschutz',
@@ -17,8 +18,8 @@ import { legal, site } from '../../data/portfolio.data';
     <app-legal-layout title="Datenschutz">
       <p>
         Der Schutz deiner Daten ist mir wichtig. Diese Website ist bewusst schlank gehalten: keine
-        Cookies, kein Tracking, keine Analyse-Tools und keine eingebundenen Dienste von Dritten. Im
-        Folgenden steht, welche Daten trotzdem verarbeitet werden und warum.
+        Cookies, kein Tracking und keine Analyse-Tools. Im Folgenden steht, welche Daten trotzdem
+        verarbeitet werden und warum.
       </p>
 
       <h2>1. Verantwortlicher</h2>
@@ -51,14 +52,42 @@ import { legal, site } from '../../data/portfolio.data';
         liegt darin, die Website zuverlässig bereitzustellen.
       </p>
 
-      <h2>3. Keine Cookies, kein Tracking</h2>
+      <h2>3. Cloudflare</h2>
+      <p>
+        Zum Schutz vor Angriffen und für eine schnelle Auslieferung läuft diese Website über das
+        Netzwerk von Cloudflare. Anbieter ist die Cloudflare, Inc., 101 Townsend St., San Francisco,
+        CA 94107, USA. Cloudflare ist zwischen deinen Browser und meinen Server geschaltet: Alle
+        Aufrufe der Website laufen zunächst über Server von Cloudflare und werden von dort an meinen
+        Server weitergeleitet.
+      </p>
+      <p>
+        Dabei verarbeitet Cloudflare deine IP-Adresse sowie die technischen Angaben, die dein
+        Browser beim Aufruf übermittelt (z. B. aufgerufene Seite, Browsertyp, Zeitpunkt). Cloudflare
+        nutzt diese Daten, um die Seite auszuliefern und um schädliche Zugriffe zu erkennen und
+        abzuwehren.<br />
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse
+        liegt in einer sicheren und zuverlässigen Bereitstellung der Website.<br />
+        <strong>Auftragsverarbeitung:</strong> Mit Cloudflare besteht ein Vertrag zur
+        Auftragsverarbeitung nach Art. 28 DSGVO.<br />
+        <strong>Drittlandübermittlung:</strong> Dabei können Daten in die USA übermittelt werden.
+        Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert; für die Übermittlung
+        liegt damit ein Angemessenheitsbeschluss der EU-Kommission vor (Art. 45 DSGVO).
+      </p>
+      <p>
+        Weitere Informationen findest du in der
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener"
+          >Datenschutzerklärung von Cloudflare</a
+        >.
+      </p>
+
+      <h2>4. Keine Cookies, kein Tracking</h2>
       <p>
         Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge.
         Schriftarten, Bilder und Skripte werden ausschließlich von meinem eigenen Server geladen; es
-        werden dabei keine Daten an Dritte (z. B. Google) übertragen.
+        werden dabei keine Daten an weitere Dritte (z. B. Google) übertragen.
       </p>
 
-      <h2>4. Kontakt per E-Mail</h2>
+      <h2>5. Kontakt per E-Mail</h2>
       <p>
         Wenn du mir eine E-Mail schreibst, verarbeite ich deine E-Mail-Adresse und die Inhalte
         deiner Nachricht, um dein Anliegen zu beantworten.<br />
@@ -70,20 +99,20 @@ import { legal, site } from '../../data/portfolio.data';
         entgegenstehen.
       </p>
 
-      <h2>5. Externe Links</h2>
+      <h2>6. Externe Links</h2>
       <p>
         Die Website enthält Links zu externen Angeboten (z. B. LinkedIn). Erst wenn du einen solchen
         Link anklickst, verlässt du diese Website; für die Datenverarbeitung dort ist der jeweilige
         Anbieter verantwortlich.
       </p>
 
-      <h2>6. SSL-/TLS-Verschlüsselung</h2>
+      <h2>7. SSL-/TLS-Verschlüsselung</h2>
       <p>
         Die Verbindung zu dieser Website ist per TLS verschlüsselt. Du erkennst das an „https://“
         und dem Schloss-Symbol in der Adresszeile deines Browsers.
       </p>
 
-      <h2>7. Deine Rechte</h2>
+      <h2>8. Deine Rechte</h2>
       <p>Du hast im Rahmen der gesetzlichen Vorgaben jederzeit das Recht auf:</p>
       <ul>
         <li>Auskunft über die zu deiner Person gespeicherten Daten (Art. 15 DSGVO)</li>
@@ -101,7 +130,7 @@ import { legal, site } from '../../data/portfolio.data';
         >.
       </p>
 
-      <h2>8. Beschwerderecht</h2>
+      <h2>9. Beschwerderecht</h2>
       <p>
         Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Für mich
         zuständig ist:
