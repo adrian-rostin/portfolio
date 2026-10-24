@@ -22,7 +22,9 @@ import { nav, profile } from '../../data/portfolio.data';
             class="btn btn-primary btn-mail h-14 px-7 text-base [--fill-text:var(--pf-ink)] [--fill:var(--pf-paper)]"
             [href]="'mailto:' + profile.email"
           >
-            <app-icon name="envelope" class="mail-icon size-5" /> {{ profile.email }}
+            <app-icon name="envelope" class="mail-icon size-5" />
+            <!-- Eigenes Element: Cloudflare verschlüsselt die Adresse hier gegen Spam-Bots -->
+            <span>{{ profile.email }}</span>
           </a>
         </div>
 
