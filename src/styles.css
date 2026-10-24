@@ -1,0 +1,198 @@
+@import 'tailwindcss';
+
+/* Design-Tokens aus dem Portfolio Design System. Feste Farben – kein Hell/Dunkel-Umschalten.
+   Die Seite beginnt dunkel („paper“ ist hier der dunkle Grund, „ink“ die helle Schrift);
+   helle Abschnitte (Band, Über mich, Fußzeile) nutzen bg-ink. */
+/* Farbschema „Terrakotta“ (das ursprüngliche): warmes Fast-Schwarz, Creme, Terrakotta-Orange als Akzent. */
+:root {
+  --pf-paper: #171512; /* dunkler Grund (warmes Fast-Schwarz) */
+  --pf-paper-raised: #211e1a; /* Karten auf dunklem Grund */
+  --pf-line: #36312b; /* Haarlinien */
+  --pf-ink: #f1ebe2; /* helle Schrift / helle Flächen (Creme) */
+  --pf-ink-muted: #a89d90; /* Nebentext */
+  --pf-accent: #ef8a6a; /* Akzent auf dunklem Grund */
+  --pf-accent-soft: #3d2219; /* gedämpfte Akzentfläche (Scheibe, Chips) */
+  /* Akzent auf hellen Flächen (genug Kontrast auf Creme) */
+  --pf-accent-deep: #b4462a;
+  --pf-on-accent: #171512;
+  color-scheme: dark;
+}
+
+/* Tailwind-Utilities wie bg-paper, text-ink, border-line, text-accent … */
+@theme inline {
+  --color-paper: var(--pf-paper);
+  --color-paper-raised: var(--pf-paper-raised);
+  --color-line: var(--pf-line);
+  --color-ink: var(--pf-ink);
+  --color-ink-muted: var(--pf-ink-muted);
+  --color-accent: var(--pf-accent);
+  --color-accent-soft: var(--pf-accent-soft);
+  --color-accent-deep: var(--pf-accent-deep);
+  --color-on-accent: var(--pf-on-accent);
+  /* Space Grotesk für Überschriften/Namen (technisch, mit Charakter), Inter für Text, JetBrains Mono für Labels */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --radius-card: 10px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth; /* weiches Scrollen zu #ueber-mich, #skills … */
+    scroll-padding-top: 88px; /* Platz für die fixe Navigation */
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  /* Lenis übernimmt das weiche Scrollen; das CSS-Smooth-Scrolling darf dann nicht zusätzlich greifen */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  html.lenis.lenis-stopped {
+    overflow: clip;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  ::selection {
+    background: var(--pf-accent-soft);
+    color: var(--pf-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--pf-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .label {
+    @apply font-mono text-[12px] leading-[18px] font-medium tracking-[0.04em] uppercase;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 h-11 px-[22px] rounded-full border border-ink-muted text-[15px] font-medium text-ink transition-colors hover:border-ink hover:bg-paper-raised;
+  }
+  .btn-primary {
+    @apply bg-accent border-accent text-on-accent hover:bg-ink hover:border-ink hover:text-paper;
+  }
+  .chip {
+    @apply inline-flex items-center h-[26px] px-2.5 rounded-[4px] bg-accent-soft text-ink font-mono text-[11.5px] font-medium tracking-[0.02em] whitespace-nowrap;
+  }
+  .chip-outline {
+    @apply bg-transparent border border-line text-ink-muted;
+  }
+}
+
+/* Mail-Button: Fläche schiebt sich von links hinein, der Umschlag „fliegt“ los und kommt wieder.
+   In @layer components, damit Utility-Klassen wie [--fill:…] die Farben überschreiben können. */
+@layer components {
+  .btn-mail {
+    --fill: var(--pf-ink);
+    --fill-text: var(--pf-paper);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      color 0.35s ease,
+      border-color 0.35s ease;
+  }
+  .btn-mail::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--fill);
+    transform: translateX(-101%);
+    transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  .btn-mail.btn-primary:hover {
+    background: var(--pf-accent);
+    border-color: var(--fill);
+    color: var(--fill-text);
+  }
+  .btn-mail:hover::before,
+  .btn-mail:focus-visible::before {
+    transform: translateX(0);
+  }
+  .btn-mail:focus-visible {
+    color: var(--fill-text);
+  }
+  .btn-mail:hover .mail-icon,
+  .btn-mail:focus-visible .mail-icon {
+    animation: mail-send 0.75s cubic-bezier(0.5, 0, 0.2, 1);
+  }
+  @keyframes mail-send {
+    0% {
+      transform: translate(0, 0) rotate(0);
+      opacity: 1;
+    }
+    40% {
+      transform: translate(18px, -14px) rotate(-14deg) scale(0.8);
+      opacity: 0;
+    }
+    41% {
+      transform: translate(-18px, 10px) rotate(0) scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(0, 0) rotate(0) scale(1);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-mail::before {
+      transition: none;
+    }
+    .btn-mail:hover .mail-icon,
+    .btn-mail:focus-visible .mail-icon {
+      animation: none;
+    }
+  }
+}
+
+/* Abschnitt rückt eine Bildschirmhöhe unter die „Über mich“-Bühne (siehe about.ts) */
+.tuck-under {
+  position: relative;
+  z-index: 1;
+  margin-top: -100svh;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tuck-under {
+    margin-top: 0;
+  }
+}
+
+/* Space Grotesk hat keine Kursive – keine künstlich schräggestellte Schrift, Akzente nur über Farbe */
+.font-display i,
+.font-display .italic,
+.font-display.italic {
+  font-style: normal;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes drop {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
