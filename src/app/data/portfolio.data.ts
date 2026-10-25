@@ -12,7 +12,7 @@ export interface SkillGroup {
 export const site = {
   /** Öffentliche Adresse der Seite – wichtig für Vorschaubilder auf LinkedIn & Co. (ohne / am Ende). */
   url: 'https://adrianrostin.de',
-  title: 'Adrian Rostin | Software Engineer Portfolio',
+  title: 'Adrian Rostin',
   description:
     'Backend-Entwickler aus Wiesbaden: Java, Spring Boot, REST-APIs und Deployment mit Kubernetes. Drei Jahre Praxis bei der Deutschen Telekom.',
   ogImage: '/images/og-image.png',
@@ -36,6 +36,18 @@ export const profile = {
    * Daraus wird im Hero der 3D-Kopf geformt. Bei neuem Foto neu erzeugen (siehe README).
    */
   portraitDepth: '/images/portrait-depth.png',
+  /** Kurzvorstellung im Hero; `strong` wird hervorgehoben. */
+  intro: [
+    { text: 'Backend-Entwickler mit Schwerpunkt auf ' },
+    { text: 'Java', strong: true },
+    { text: ' und ' },
+    { text: 'Spring Boot', strong: true },
+    { text: '. Ich kümmere mich auch um alles, was danach kommt, und bringe meine Services mit ' },
+    { text: 'Docker', strong: true },
+    { text: ' und ' },
+    { text: 'Kubernetes', strong: true },
+    { text: ' in Produktion.' },
+  ],
   statement:
     'Ich entwickle Backend-Services und APIs, die zuverlässig laufen. Vom ersten Commit bis zum Deployment in Kubernetes.',
   statementAccent: ['zuverlässig', 'Kubernetes.'],

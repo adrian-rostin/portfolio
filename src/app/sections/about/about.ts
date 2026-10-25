@@ -116,7 +116,8 @@ export class About {
       const SNAP_TIME = 0.45; // Sekunden
       let snap = 0;
       // Wegclippen am Ende: ebenfalls zeitbasiert, sobald die Schrift hinausgeflogen ist
-      const WIPE_AT = 0.8; // Fortschritt pp
+      // Kurz nachdem das letzte Wort zu verblassen beginnt (es fliegt ab 0.66 hinaus) → kein Moment nur Weiß
+      const WIPE_AT = 0.67; // Fortschritt pp
       const WIPE_TIME = 0.5; // Sekunden
       let wipe = 0;
 

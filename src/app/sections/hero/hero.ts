@@ -24,7 +24,7 @@ function skillLines(): string[][] {
  * Seitenkopf als Scroll-Bühne. Beim Scrollen:
  *  1. Der 3D-Kopf schrumpft und landet deckungsgleich in einer kleinen Kachel (Foto passt exakt),
  *     wird dabei schwarz-weiß; Scheibe weg, Kachel-Hintergrund kommt.
- *  2. „Adrian“ wandert von oben, „Rostin“ von unten – beide treffen sich mittig über der Kachel.
+ *  2. Der Name wandert aus dem Textblock neben die Kachel, Rolle und Kurzvorstellung blenden aus.
  *  3. Zwei Schriftzeilen mit den Skills fahren dahinter herein.
  */
 @Component({
@@ -137,7 +137,7 @@ function skillLines(): string[][] {
         <!-- Kachel: Ziel des Kopfes. Box bleibt gerade (zum Messen), die Kachel selbst dreht sich am Ende leicht. -->
         <div
           #cardBox
-          class="card-box absolute top-[56%] left-1/2 z-[1] aspect-[4/5] w-[clamp(170px,22vw,300px)] -translate-x-1/2 -translate-y-1/2"
+          class="card-box pointer-events-none absolute top-[56%] left-1/2 z-[1] aspect-[4/5] w-[clamp(170px,22vw,300px)] -translate-x-1/2 -translate-y-1/2"
           aria-hidden="true"
         >
           <div #card class="relative size-full origin-top">
@@ -156,17 +156,18 @@ function skillLines(): string[][] {
         </div>
 
         <!-- Großer Kopf mit Scheibe: schrumpft genau in die Kachel -->
-        <div #figure class="figure absolute inset-0 z-[2]">
+        <div #figure class="figure pointer-events-none absolute inset-0 z-[2]">
+          <!-- Groß: Kopf links neben dem Text. Schmal: Kopf unten mittig unter dem Text. -->
           <div
             #disc
-            class="absolute bottom-[10%] left-1/2 aspect-square w-[min(94vw,680px)] -translate-x-1/2 rounded-full bg-accent-soft md:bottom-[9%] md:w-[min(70vh,70vw,680px)]"
+            class="absolute bottom-[8%] left-1/2 aspect-square w-[min(84vw,520px,calc(100svh-420px))] -translate-x-1/2 rounded-full bg-accent-soft md:w-[min(84vw,520px,calc(100svh-520px))] lg:bottom-[9%] lg:left-[29%] lg:w-[min(68vh,48vw,660px)]"
             aria-hidden="true"
           >
             <div class="absolute inset-[9%] rounded-full border border-ink/15"></div>
           </div>
           <div
             #frame
-            class="absolute bottom-0 left-1/2 z-[3] aspect-[1200/1371] h-[68%] -translate-x-1/2 md:h-[88%]"
+            class="absolute bottom-0 left-1/2 z-[3] aspect-[1200/1371] h-[min(54%,calc(100%-450px))] -translate-x-1/2 md:h-[min(58%,calc(100%-550px))] lg:left-[29%] lg:h-[86%]"
           >
             <!-- Körper-Aussparung: Wo der Anzug unten ausblendet, scheint der Seitengrund durch, nicht die Scheibe -->
             <div #bodyFill class="body-fill absolute inset-0 bg-paper" aria-hidden="true"></div>
@@ -188,31 +189,48 @@ function skillLines(): string[][] {
           </div>
         </div>
 
-        <!-- Name: wandert beim Scrollen zusammen und schwebt mittig über der Kachel -->
+        <!-- Text: Name, Kurzvorstellung, Ort, Kontakt. Beim Scrollen wandert der Name zur Kachel, der Rest blendet aus. -->
         <div #nameWrap class="bob pointer-events-none absolute inset-0 z-[4]">
-          <h1
-            class="m-0 font-display text-[19vw] leading-[.86] font-medium tracking-[-0.035em] md:text-[clamp(64px,14.5vw,230px)]"
+          <div
+            class="absolute inset-x-4 top-[96px] md:inset-x-8 md:top-[120px] lg:top-1/2 lg:right-[5vw] lg:left-[55vw] lg:-translate-y-1/2"
           >
-            <span
-              #first
-              class="name-part absolute top-[15%] left-4 origin-top-left whitespace-nowrap text-ink md:left-[3.5vw]"
-              >{{ profile.firstName }}</span
+            <h1
+              class="m-0 font-display text-[16vw] leading-[.88] font-medium tracking-[-0.035em] md:text-[12vw] lg:text-[clamp(64px,8.4vw,150px)]"
             >
-            <span
-              #last
-              class="name-part absolute top-[calc(15%+17vw)] left-4 origin-top-left whitespace-nowrap italic text-accent md:top-auto md:right-[3.5vw] md:bottom-[9%] md:left-auto"
-              >{{ profile.lastName }}</span
-            >
-          </h1>
+              <span
+                #first
+                class="name-part pointer-events-auto block w-fit origin-top-left whitespace-nowrap text-ink"
+                >{{ profile.firstName }}</span
+              >
+              <span
+                #last
+                class="name-part pointer-events-auto block w-fit origin-top-left whitespace-nowrap italic text-accent"
+                >{{ profile.lastName }}</span
+              >
+            </h1>
+            <div #details class="pointer-events-auto mt-5 lg:mt-8">
+              <p
+                class="m-0 max-w-[38ch] text-[15px] leading-relaxed text-ink-muted md:text-lg lg:text-[clamp(16px,1.35vw,20px)]"
+              >
+                @for (part of profile.intro; track $index) {
+                  <!-- Jeder Teil in eigenem Element, damit keine Leerzeichen vor Satzzeichen entstehen -->
+                  <span [class]="part.strong ? 'font-medium text-ink' : ''">{{ part.text }}</span>
+                }
+              </p>
+              <p class="label m-0 mt-4 flex items-center gap-1.5 text-ink lg:mt-5">
+                <app-icon name="map-pin" class="size-4 text-ink-muted" />{{ profile.location }}
+              </p>
+              <div class="mt-6 flex flex-wrap gap-3 lg:mt-8">
+                <a class="btn btn-primary btn-mail" [href]="'mailto:' + profile.email">
+                  <app-icon name="envelope" class="mail-icon size-4" />E-Mail
+                </a>
+                <a class="btn" [href]="profile.linkedin" target="_blank" rel="noopener">
+                  <app-icon name="arrow-up-right" class="size-4" />LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <!-- Ort: blendet aus -->
-        <p
-          #loc
-          class="label absolute bottom-4 left-4 z-[4] m-0 flex items-center gap-1.5 text-ink md:bottom-8 md:left-8"
-        >
-          <app-icon name="map-pin" class="size-4 text-ink-muted" />{{ profile.location }}
-        </p>
       </div>
     </section>
   `,
@@ -234,7 +252,7 @@ export class Hero {
   private readonly nameWrap = viewChild.required<ElementRef<HTMLElement>>('nameWrap');
   private readonly first = viewChild.required<ElementRef<HTMLElement>>('first');
   private readonly last = viewChild.required<ElementRef<HTMLElement>>('last');
-  private readonly loc = viewChild.required<ElementRef<HTMLElement>>('loc');
+  private readonly details = viewChild.required<ElementRef<HTMLElement>>('details');
   private readonly frameEl = viewChild.required<ElementRef<HTMLElement>>('frame');
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
 
@@ -274,6 +292,12 @@ export class Hero {
           const box = this.cardBox().nativeElement,
             first = this.first().nativeElement,
             last = this.last().nativeElement;
+          // Startposition des Namens im Textblock, relativ zur Bühne (ohne eigene Transforms gemessen)
+          first.style.transform = '';
+          last.style.transform = '';
+          const wrapR = this.nameWrap().nativeElement.getBoundingClientRect();
+          const firstR = first.getBoundingClientRect();
+          const lastR = last.getBoundingClientRect();
           const vw = fig.clientWidth;
           const frameH = frame.offsetHeight;
           // Box ist per translate zentriert → Mittelpunkt/Oberkante aus Layout + halber Größe
@@ -313,19 +337,19 @@ export class Hero {
             rT = { x: left + aw * sc + g, y };
           }
           m = {
-            fx: vw / 2,
+            fx: frame.offsetLeft, // Rahmen ist per left + translateX(-50%) zentriert → Mitte
             fy: fig.clientHeight - frameH,
             frameH,
             cardCx,
             cardTop,
             cardH,
             a: {
-              x: first.offsetLeft,
-              y: first.offsetTop,
-              w: first.offsetWidth,
-              h: first.offsetHeight,
+              x: firstR.left - wrapR.left,
+              y: firstR.top - wrapR.top,
+              w: firstR.width,
+              h: firstR.height,
             },
-            r: { x: last.offsetLeft, y: last.offsetTop, w: last.offsetWidth },
+            r: { x: lastR.left - wrapR.left, y: lastR.top - wrapR.top, w: lastR.width },
             sc: targetFs / fs,
             gap: targetFs * 0.25,
             aT,
@@ -396,11 +420,13 @@ export class Hero {
             clamp((q - 0.75) / 0.15).toFixed(3),
           );
 
-          // Ort blendet aus
-          const f = ease(clamp(q / 0.25));
-          const ls = this.loc().nativeElement.style;
-          ls.opacity = String(1 - f);
-          ls.transform = `translateY(${(f * 30).toFixed(1)}px)`;
+          // Kurzvorstellung, Ort und Knöpfe blenden aus, der Name bleibt
+          const f = ease(clamp(q / 0.22));
+          const ds = this.details().nativeElement.style;
+          ds.opacity = String(1 - f);
+          ds.transform = `translateY(${(f * 30).toFixed(1)}px)`;
+          // Ausgeblendeter Text samt Knöpfen fängt keine Maus mehr ab (Bänder bleiben markierbar)
+          ds.pointerEvents = f > 0.5 ? 'none' : '';
 
           // 3. Schriftzeilen: sichtbar, sie fahren selbst ins Bild (siehe Schleife unten)
           this.linesEl().nativeElement.style.opacity = '1';
