@@ -15,8 +15,9 @@ import { profile } from '../../data/portfolio.data';
 
 /**
  * „Über mich“ auf heller Fläche: Ab einem Punkt snappt die Fläche in fester Zeit nach oben über den
- * dunklen Kopfbereich, dann fliegt das Statement mittig herein, bleibt stehen und fliegt wieder hinaus;
- * danach schiebt sich die Fläche nach oben weg und gibt den Tech-Stack frei, der schon darunter liegt.
+ * dunklen Kopfbereich, dann fliegt das Statement mittig herein, bleibt stehen und fliegt wieder hinaus.
+ * Sobald die Schrift weg ist, clippt die Fläche in fester Zeit nach oben weg und gibt den Tech-Stack
+ * frei, der schon darunter liegt.
  */
 @Component({
   selector: 'app-about',
@@ -25,7 +26,7 @@ import { profile } from '../../data/portfolio.data';
   styles: `
     /* Scrollweg der Bühne: Hereinfliegen, Stehen, Hinausfliegen, Wegclippen */
     .stage {
-      height: 300svh;
+      height: 190svh;
     }
     /* Sprungmarke fürs Menü: so weit in der Bühne, dass der Satz schon da ist (72px = Navigation) */
     .anchor {
@@ -114,6 +115,10 @@ export class About {
       const SNAP_AT = 0.79; // kurz nachdem die Kachel sichtbar nach oben wegzieht → auslösen (kleiner = später)
       const SNAP_TIME = 0.45; // Sekunden
       let snap = 0;
+      // Wegclippen am Ende: ebenfalls zeitbasiert, sobald die Schrift hinausgeflogen ist
+      const WIPE_AT = 0.8; // Fortschritt pp
+      const WIPE_TIME = 0.5; // Sekunden
+      let wipe = 0;
 
       const render = (dt: number) => {
         const vh = win.innerHeight;
@@ -125,6 +130,9 @@ export class About {
         const target = r.top < vh * SNAP_AT ? 1 : 0;
         snap =
           target > snap ? Math.min(1, snap + dt / SNAP_TIME) : Math.max(0, snap - dt / SNAP_TIME);
+        // Bühne komplett unterhalb des Bildschirms (z. B. per Scrollbalken schnell nach oben gesprungen):
+        // Fläche sofort verstecken statt sie herunterfahren zu lassen.
+        if (r.top >= vh) snap = 0;
         // Bis die Bühne oben angekommen ist, liegt die Fläche fest am Bildschirm (position: fixed) statt
         // per Skript gegen das Scrollen nachgezogen zu werden – das ruckelte mit dem weichen Scrollen.
         // Danach übernimmt „sticky“ an genau derselben Stelle (oben, 0).
@@ -143,8 +151,8 @@ export class About {
         // 2. Schrift fliegt herein; 3. Stehen; 4. Hinausfliegen
         this.wordEls().forEach((ref, i) => {
           const k = n > 1 ? i / (n - 1) : 0;
-          const e = ease(clamp((pp - k * 0.1) / 0.07));
-          const x = ease(clamp((pp - 0.58 - k * 0.1) / 0.08));
+          const e = ease(clamp((pp - k * 0.12) / 0.1));
+          const x = ease(clamp((pp - 0.52 - k * 0.14) / 0.1));
           const s = ref.nativeElement.style;
           s.opacity = String(e * (1 - x));
           s.filter = `blur(${(1 - e + x) * 10}px)`;
@@ -153,8 +161,15 @@ export class About {
             `rotate(${(1 - e) * 10 + x * dirs[i].r * 14}deg) scale(${0.85 + 0.15 * e + x * 0.1})`;
         });
 
-        // 5. Danach schiebt sich die Fläche nach oben weg und gibt den Tech-Stack frei
-        const wipeOut = easeInOut(clamp((pp - 0.76) / 0.24)) * 100;
+        // 5. Ist die Schrift weg, clippt die Fläche in fester Zeit nach oben weg (rückwärts beim Hochscrollen)
+        const wipeTarget = pp >= WIPE_AT ? 1 : 0;
+        wipe =
+          wipeTarget > wipe
+            ? Math.min(1, wipe + dt / WIPE_TIME)
+            : Math.max(0, wipe - dt / WIPE_TIME);
+        if (r.bottom <= 0) wipe = 1; // schon vorbei gescrollt
+        if (r.top >= vh) wipe = 0;
+        const wipeOut = easeInOut(wipe) * 100;
         pane.style.clipPath = `inset(0 0 ${wipeOut.toFixed(2)}% 0)`;
       };
 
@@ -164,13 +179,15 @@ export class About {
         rootMargin: '50% 0px',
       });
       io.observe(this.stage().nativeElement);
+      const pane = this.pane().nativeElement;
       let raf = 0,
         lastT = performance.now();
       const loop = (now: number) => {
         raf = win.requestAnimationFrame(loop);
         const dt = Math.min(0.05, (now - lastT) / 1000);
         lastT = now;
-        if (visible) render(dt);
+        // Auch außerhalb der Sichtweite einmal nachziehen, damit nie eine Fläche stehen bleibt
+        if (visible || pane.style.visibility !== 'hidden') render(dt);
       };
       render(0);
       raf = win.requestAnimationFrame(loop);

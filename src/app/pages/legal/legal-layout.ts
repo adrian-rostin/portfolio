@@ -47,8 +47,6 @@ import { Icon } from '../../shared/ui/icon';
   `,
   template: `
     <main class="relative min-h-svh bg-ink pt-[120px] pb-24 text-paper">
-      <!-- dunkler Streifen hinter der (hellen) Navigation, damit Name und Menü lesbar bleiben -->
-      <div class="absolute inset-x-0 top-0 h-[72px] bg-paper" aria-hidden="true"></div>
       <article class="legal mx-auto max-w-[760px] px-4 md:px-8">
         <a
           routerLink="/"

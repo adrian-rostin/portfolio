@@ -53,7 +53,7 @@ function skillLines(): string[][] {
     }
     /* Scrollweg der Bühne */
     .intro {
-      height: 300svh;
+      height: 250svh;
     } /* erste Hälfte: Übergang Kopf → Kachel, zweite Hälfte: Band steht */
     .figure,
     .name-part {
@@ -336,7 +336,7 @@ export class Hero {
 
         // Übergang folgt dem Scrollen: über diesen Anteil des Bühnenwegs läuft Kopf → Kachel,
         // danach steht das Band. Leicht geglättet, damit es mit dem weichen Scrollen ruhig bleibt.
-        const SPAN = 0.5;
+        const SPAN = 0.6;
         let anim = 0; // 0 … 1
         let lastAnim = -1;
 
