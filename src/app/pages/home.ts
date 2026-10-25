@@ -14,8 +14,10 @@ import { Contact } from '../sections/contact/contact';
     <main>
       <app-hero />
       <app-about />
-      <!-- liegt schon unter der braunen Bühne und wird beim Wegclippen sichtbar -->
-      <app-skills class="tuck-under" />
+      <!-- Hintergrund folgt dem Farbwechsel aus „Über mich“ -->
+      <div class="after-about">
+        <app-skills />
+      </div>
     </main>
     <app-contact />
   `,

@@ -157,16 +157,13 @@
   }
 }
 
-/* Abschnitt rückt eine Bildschirmhöhe unter die „Über mich“-Bühne (siehe about.ts) */
-.tuck-under {
-  position: relative;
-  z-index: 1;
-  margin-top: -100svh;
+/* Bereich unter „Über mich“: Farbe wechselt beim Scrollen von hell nach dunkel (about.ts) */
+.after-about {
+  background-color: var(--after-about-bg, var(--pf-paper));
 }
-@media (prefers-reduced-motion: reduce) {
-  .tuck-under {
-    margin-top: 0;
-  }
+/* Mit Animation: etwas Luft, damit der Grund schon dunkel ist, wenn der Tech-Stack auftaucht */
+.about-animated .after-about {
+  padding-top: 12svh;
 }
 
 /* Space Grotesk hat keine Kursive – keine künstlich schräggestellte Schrift, Akzente nur über Farbe */

@@ -187,7 +187,10 @@ export async function createPortrait3D(
   };
   win.addEventListener('pointermove', onMove, { passive: true });
   let visible = true;
-  const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
+  const io = new IntersectionObserver(
+    // Bei schnellen Sprüngen kommen mehrere Meldungen gebündelt – die letzte ist die aktuelle
+    (entries) => (visible = entries[entries.length - 1].isIntersecting),
+  );
   io.observe(canvas);
 
   // Nur eine leichte Bewegung: ≈ 6° zur Seite, ≈ 2° hoch/runter

@@ -305,37 +305,22 @@ export class Hero {
           const cardCx = box.offsetLeft; // left-1/2, translateX(-50%)
           const cardTop = box.offsetTop - cardH / 2; // top-[56%], translateY(-50%)
           const fs = parseFloat(getComputedStyle(first).fontSize);
-          const cardW = box.offsetWidth,
-            cardCy = box.offsetTop;
           const aw = first.offsetWidth,
             rw = last.offsetWidth,
             ah = first.offsetHeight;
-          // Breit: „Adrian“ links, „Rostin“ rechts neben der Kachel, mittig auf Kachelhöhe (im Band).
-          // Schmal (Handy): zu wenig Platz daneben → nebeneinander über der Kachel.
-          const side = (vw - cardW) / 2 - 24;
-          const besides = vw >= 720;
-          let targetFs: number;
-          let aT: { x: number; y: number }, rT: { x: number; y: number };
-          if (besides) {
-            const gap = Math.max(20, vw * 0.025);
-            targetFs = Math.min(
-              112,
-              Math.max(36, vw * 0.075),
-              (fs * (side - gap)) / Math.max(aw, rw),
-            );
-            const sc = targetFs / fs;
-            const y = cardCy - (ah * sc) / 2;
-            aT = { x: cardCx - cardW / 2 - gap - aw * sc, y };
-            rT = { x: cardCx + cardW / 2 + gap, y };
-          } else {
-            targetFs = Math.min(Math.max(44, vw * 0.07), 112, (vw * 0.9) / ((aw + rw) / fs + 0.25));
-            const sc = targetFs / fs,
-              g = targetFs * 0.25;
-            const left = cardCx - ((aw + rw) * sc + g) / 2;
-            const y = cardTop - ah * sc * 0.92;
-            aT = { x: left, y };
-            rT = { x: left + aw * sc + g, y };
-          }
+          // Ziel: „Adrian Rostin“ nebeneinander, mittig über der Kachel – oberhalb der Schriftbänder,
+          // damit der Name nicht in der laufenden Schrift untergeht
+          const targetFs = Math.min(
+            Math.max(44, vw * 0.07),
+            112,
+            (vw * 0.9) / ((aw + rw) / fs + 0.25),
+          );
+          const sc = targetFs / fs,
+            g = targetFs * 0.25;
+          const left = cardCx - ((aw + rw) * sc + g) / 2;
+          const y = cardTop - ah * sc - targetFs * 0.22; // kleiner Abstand, auch bei gedrehter Kachel
+          const aT = { x: left, y };
+          const rT = { x: left + aw * sc + g, y };
           m = {
             fx: frame.offsetLeft, // Rahmen ist per left + translateX(-50%) zentriert → Mitte
             fy: fig.clientHeight - frameH,
@@ -410,7 +395,7 @@ export class Hero {
           this.cardImg().nativeElement.style.opacity = String(swap);
           this.card().nativeElement.style.transform = `rotate(${rot.toFixed(2)}deg)`;
 
-          // 2. Name: „Adrian“ von oben, „Rostin“ von unten → nebeneinander mittig knapp über der Kachel
+          // 2. Name wandert aus dem Textblock nebeneinander mittig über die Kachel
           const n = easeInOut(clamp((q - 0.02) / 0.62));
           const sn = lerp(1, m.sc, n);
           this.first().nativeElement.style.transform = `translate3d(${((m.aT.x - m.a.x) * n).toFixed(1)}px, ${((m.aT.y - m.a.y) * n).toFixed(1)}px, 0) scale(${sn.toFixed(4)})`;
@@ -433,7 +418,10 @@ export class Hero {
         };
 
         let visible = true;
-        const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
+        const io = new IntersectionObserver(
+          // Bei schnellen Sprüngen kommen mehrere Meldungen gebündelt – die letzte ist die aktuelle
+          (entries) => (visible = entries[entries.length - 1].isIntersecting),
+        );
         io.observe(this.stage().nativeElement);
 
         let raf = 0,
