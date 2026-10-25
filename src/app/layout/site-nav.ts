@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { nav, profile } from '../data/portfolio.data';
+import { nav } from '../data/portfolio.data';
 import { createDisplacementMap, supportsRefraction } from '../shared/ui/liquid-glass';
 
 interface LinkBox {
@@ -23,7 +23,7 @@ interface LinkBox {
 }
 
 /**
- * Minimale Kopfzeile: Name links, mittig eine Glas-Pille mit den Sprungmarken.
+ * Minimale Kopfzeile: mittig eine Glas-Pille mit den Sprungmarken.
  * Ein „Linsen“-Highlight gleitet zum aktiven bzw. überfahrenen Menüpunkt.
  */
 @Component({
@@ -111,20 +111,6 @@ interface LinkBox {
     }
   `,
   template: `
-    <!-- Name: Differenz-Mischung, damit er auf dunklen und hellen Flächen lesbar bleibt -->
-    <div
-      class="pointer-events-none fixed inset-x-0 top-0 z-50 hidden mix-blend-difference sm:block"
-    >
-      <div class="mx-auto flex h-[72px] max-w-[1240px] items-center px-4 md:px-8">
-        <a
-          routerLink="/"
-          fragment="top"
-          class="pointer-events-auto font-display text-lg leading-none tracking-tight text-[#f1ebe2]"
-          >{{ profile.firstName }} {{ profile.lastName }}</a
-        >
-      </div>
-    </div>
-
     <nav
       class="pointer-events-none fixed inset-x-0 top-0 z-50 flex h-[72px] items-center justify-center"
       aria-label="Hauptnavigation"
@@ -217,7 +203,6 @@ interface LinkBox {
 })
 export class SiteNav {
   protected readonly nav = nav;
-  protected readonly profile = profile;
   protected readonly refract = signal(false);
   protected readonly size = signal({ w: 1, h: 1 });
   protected readonly map = signal('');
