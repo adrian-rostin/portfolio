@@ -127,12 +127,12 @@ export class About {
       // Hintergrund wechselt beim Weiterscrollen langsam von hell (Über mich) zu dunkel (Tech-Stack).
       // Fläche und der Bereich darunter (--after-about-bg, siehe styles.css) bekommen dieselbe Farbe,
       // so gibt es keine sichtbare Kante, wenn die Fläche wegscrollt.
-      // Die Schrift wechselt mit: dunkel auf hell, hell auf dunkel – Akzent vom dunklen Orange (für
-      // helle Flächen) zum Orange des Tech-Stacks, damit zwischen den Abschnitten nur ein Orange zu sehen ist.
+      // Die Schrift wechselt mit: dunkel auf hell, hell auf dunkel – Akzent vom dunklen Ton (für
+      // helle Flächen) zum Akzent des Tech-Stacks.
       const LIGHT = [241, 235, 226]; // --pf-ink
       const DARK = [23, 21, 18]; // --pf-paper
-      const ACCENT_ON_LIGHT = [180, 70, 42]; // --pf-accent-deep
-      const ACCENT_ON_DARK = [239, 138, 106]; // --pf-accent
+      const ACCENT_ON_LIGHT = [102, 160, 150]; // --pf-accent-deep
+      const ACCENT_ON_DARK = [0, 184, 162]; // --pf-accent
       // Start, während der Satz noch steht; Wechsel der Schrift ist fertig, bevor der Tech-Stack auftaucht
       const BG_FROM = -0.1; // Bildschirmhöhen relativ zum Lösepunkt (kurz davor, während der Pause)
       const BG_SPAN = 0.6; // über so viele Bildschirmhöhen Scrollweg

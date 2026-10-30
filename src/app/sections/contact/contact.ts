@@ -19,7 +19,7 @@ import { nav, profile } from '../../data/portfolio.data';
         <div class="mb-24 flex flex-wrap gap-3">
           <!-- Füllung in Papierfarbe, weil die Fußzeile selbst dunkel ist -->
           <a
-            class="btn btn-primary btn-mail h-14 px-7 text-base [--fill-text:var(--pf-ink)] [--fill:var(--pf-paper)]"
+            class="btn btn-primary btn-mail h-14 border-accent-deep bg-accent-deep px-7 text-base [--fill-text:var(--pf-ink)] [--fill:var(--pf-paper)]"
             [href]="'mailto:' + profile.email"
           >
             <app-icon name="envelope" class="mail-icon size-5" />

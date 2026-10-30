@@ -3,17 +3,17 @@
 /* Design-Tokens aus dem Portfolio Design System. Feste Farben – kein Hell/Dunkel-Umschalten.
    Die Seite beginnt dunkel („paper“ ist hier der dunkle Grund, „ink“ die helle Schrift);
    helle Abschnitte (Band, Über mich, Fußzeile) nutzen bg-ink. */
-/* Farbschema „Terrakotta“ (das ursprüngliche): warmes Fast-Schwarz, Creme, Terrakotta-Orange als Akzent. */
+/* Farbschema „Salbei“: Verlauf von warmem Fast-Schwarz über Graugrün bis Mint, helle Flächen in Creme. */
 :root {
   --pf-paper: #171512; /* dunkler Grund (warmes Fast-Schwarz) */
-  --pf-paper-raised: #211e1a; /* Karten auf dunklem Grund */
-  --pf-line: #36312b; /* Haarlinien */
+  --pf-paper-raised: #35342c; /* Karten auf dunklem Grund */
+  --pf-line: #52574a; /* Haarlinien */
   --pf-ink: #f1ebe2; /* helle Schrift / helle Flächen (Creme) */
-  --pf-ink-muted: #a89d90; /* Nebentext */
-  --pf-accent: #ef8a6a; /* Akzent auf dunklem Grund */
-  --pf-accent-soft: #3d2219; /* gedämpfte Akzentfläche (Scheibe, Chips) */
+  --pf-ink-muted: #87a697; /* Nebentext */
+  --pf-accent: #00b8a2; /* Akzent auf dunklem Grund (Türkis) */
+  --pf-accent-soft: #35342c; /* gedämpfte Akzentfläche (Scheibe, Chips) */
   /* Akzent auf hellen Flächen (genug Kontrast auf Creme) */
-  --pf-accent-deep: #b4462a;
+  --pf-accent-deep: #66a096; /* gedecktes Petrol */
   --pf-on-accent: #171512;
   color-scheme: dark;
 }
