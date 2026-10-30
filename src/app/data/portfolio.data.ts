@@ -3,10 +3,14 @@
  * die Komponenten lesen sie nur aus.
  */
 
-export interface SkillGroup {
-  title: string;
-  icon: 'languages' | 'frameworks' | 'infra' | 'tools';
-  items: string[];
+import type { TechLogo } from './tech-logos';
+
+export interface Skill {
+  name: string;
+  /** Logo der Technologie; fehlt es, steht ein neutrales Monogramm in `color` (z. B. Spring, dessen Logo Broadcom vorbehalten ist). */
+  logo?: TechLogo;
+  /** Farbe für Monogramm und Hover-Tönung, wenn es kein Logo gibt. */
+  color?: string;
 }
 
 export const site = {
@@ -29,6 +33,11 @@ export const profile = {
   /** Leer = GitHub wird nirgends angezeigt. Später einfach den Profil-Link eintragen. */
   github: '',
   linkedin: 'https://www.linkedin.com/in/adrian-rostin',
+  /**
+   * Leer = Xing wird nirgends angezeigt. Eintragen, sobald das Profil gefüllt ist:
+   * 'https://www.xing.com/profile/Adrian_Rostin'
+   */
+  xing: '',
   /** Freigestelltes Porträt (transparenter Hintergrund). */
   portrait: '/images/portrait.webp',
   /**
@@ -53,50 +62,25 @@ export const profile = {
   statementAccent: ['zuverlässig', 'Kubernetes.'],
 };
 
-export const skills: SkillGroup[] = [
-  {
-    title: 'Sprachen',
-    icon: 'languages',
-    items: ['Java', 'Python', 'Go', 'TypeScript', 'JavaScript', 'SQL'],
-  },
-  {
-    title: 'Frameworks',
-    icon: 'frameworks',
-    items: ['Spring Boot', 'Angular', 'React', 'FastAPI'],
-  },
-  {
-    title: 'Infrastruktur & Betrieb',
-    icon: 'infra',
-    items: [
-      'Linux',
-      'Docker',
-      'Docker Compose',
-      'Kubernetes',
-      'Rancher',
-      'Proxmox',
-      'Containerisierung',
-      'Microservices',
-      'Monitoring',
-      'Uptime Kuma',
-      'SNMP',
-    ],
-  },
-  {
-    title: 'Werkzeuge & CI/CD',
-    icon: 'tools',
-    items: [
-      'Git',
-      'GitLab CI',
-      'GitHub',
-      'Maven',
-      'Vite',
-      'Jira',
-      'Confluence',
-      'Postman',
-      'IntelliJ IDEA',
-    ],
-  },
-];
+/** Tech-Stack: erst der Schwerpunkt, dann der Rest. Logos siehe tech-logos.ts. */
+export const skills: { focus: Skill[]; more: Skill[] } = {
+  focus: [
+    { name: 'Java', logo: 'java' },
+    { name: 'Spring Boot', color: '#6DB33F' },
+    { name: 'Docker', logo: 'docker' },
+    { name: 'Kubernetes', logo: 'kubernetes' },
+  ],
+  more: [
+    { name: 'Python', logo: 'python' },
+    { name: 'Go', logo: 'go' },
+    { name: 'TypeScript', logo: 'typescript' },
+    { name: 'JavaScript', logo: 'javascript' },
+    { name: 'Angular', logo: 'angular' },
+    { name: 'React', logo: 'react' },
+    { name: 'FastAPI', logo: 'fastapi' },
+    { name: 'Git', logo: 'git' },
+  ],
+};
 
 /** Angaben für Impressum und Datenschutzerklärung. */
 export const legal = {

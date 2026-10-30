@@ -67,6 +67,17 @@ import { nav, profile } from '../../data/portfolio.data';
                   ><app-icon name="arrow-up-right" class="size-4" />LinkedIn</a
                 >
               </li>
+              @if (profile.xing) {
+                <li>
+                  <a
+                    [href]="profile.xing"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-2 leading-[30px] hover:underline hover:underline-offset-4"
+                    ><app-icon name="arrow-up-right" class="size-4" />Xing</a
+                  >
+                </li>
+              }
             </ul>
           </div>
           <div>

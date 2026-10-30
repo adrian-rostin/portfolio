@@ -16,7 +16,7 @@ import { profile, skills } from '../../data/portfolio.data';
 
 /** Die Skills aus dem Tech-Stack, auf zwei große Schriftzeilen verteilt. */
 function skillLines(): string[][] {
-  const all = skills.flatMap((g) => g.items);
+  const all = [...skills.focus, ...skills.more].map((s) => s.name);
   return [all.filter((_, i) => i % 2 === 0), all.filter((_, i) => i % 2 === 1)];
 }
 
@@ -227,6 +227,11 @@ function skillLines(): string[][] {
                 <a class="btn" [href]="profile.linkedin" target="_blank" rel="noopener">
                   <app-icon name="arrow-up-right" class="size-4" />LinkedIn
                 </a>
+                @if (profile.xing) {
+                  <a class="btn" [href]="profile.xing" target="_blank" rel="noopener">
+                    <app-icon name="arrow-up-right" class="size-4" />Xing
+                  </a>
+                }
               </div>
             </div>
           </div>

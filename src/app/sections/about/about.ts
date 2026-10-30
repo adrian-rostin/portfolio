@@ -178,6 +178,9 @@ export class About {
         // beim schnellen Scrollen eine feine Linie zwischen den Abschnitten auf.
         const release = releaseAt(vh);
         const released = r.top <= release;
+        // Schon über den Lösepunkt hinaus (z. B. per Menü direkt zum Tech-Stack gesprungen): kein Snap
+        // mehr nachholen, sonst schöbe sich die Fläche kurz über den Abschnitt darunter.
+        if (released) snap = 1;
         const pos = released ? 'absolute' : 'fixed';
         const top = released ? `${-Math.round(release)}px` : '0px';
         if (pane.style.position !== pos) pane.style.position = pos;

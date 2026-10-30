@@ -41,6 +41,33 @@ import { legal } from '../../data/portfolio.data';
         Texte, Fotos und Gestaltung dieser Website sind urheberrechtlich geschützt. Eine Verwendung
         außerhalb der Grenzen des Urheberrechts bedarf meiner vorherigen Zustimmung.
       </p>
+
+      <h2>Marken und Logos</h2>
+      <p>
+        Die im Tech-Stack genannten Namen und gezeigten Logos sind Marken ihrer jeweiligen Inhaber.
+        Sie dienen hier ausschließlich dazu, die Technologien zu benennen, mit denen ich arbeite. Es
+        besteht keine Verbindung zu den Markeninhabern; sie unterstützen oder empfehlen diese
+        Website nicht.
+      </p>
+      <p>
+        Java und JavaScript sind Marken von Oracle und/oder verbundenen Unternehmen. Python ist eine
+        eingetragene Marke der Python Software Foundation. Kubernetes ist eine eingetragene Marke
+        der Linux Foundation. Docker ist eine Marke von Docker, Inc. Spring ist eine Marke von
+        Broadcom Inc. und/oder ihren Tochtergesellschaften. TypeScript ist eine Marke der Microsoft
+        Corporation. Angular und Go sind Marken von Google LLC. React ist eine Marke von Meta
+        Platforms, Inc. Git ist eine Marke der Software Freedom Conservancy.
+      </p>
+      <p>
+        Lizenzhinweise: Git-Logo von Jason Long, lizenziert unter
+        <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener"
+          >CC BY 3.0</a
+        >. Angular-Logo von Google, lizenziert unter
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+          >CC BY 4.0</a
+        >. Logo-Grafiken aus
+        <a href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</a> (CC0) und
+        <a href="https://devicon.dev" target="_blank" rel="noopener">Devicon</a> (MIT).
+      </p>
     </app-legal-layout>
   `,
 })

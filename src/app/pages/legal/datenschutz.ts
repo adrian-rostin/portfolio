@@ -83,8 +83,9 @@ import { legal, site } from '../../data/portfolio.data';
       <h2>4. Keine Cookies, kein Tracking</h2>
       <p>
         Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge.
-        Schriftarten, Bilder und Skripte werden ausschließlich von meinem eigenen Server geladen; es
-        werden dabei keine Daten an weitere Dritte (z. B. Google) übertragen.
+        Schriftarten, Bilder und Skripte werden ausschließlich über diese Domain geladen (von meinem
+        Server bzw. über Cloudflare, siehe oben); es werden dabei keine Daten an weitere Dritte (z.
+        B. Google) übertragen.
       </p>
 
       <h2>5. Kontakt per E-Mail</h2>
