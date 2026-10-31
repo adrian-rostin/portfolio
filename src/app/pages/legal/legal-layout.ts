@@ -36,7 +36,11 @@ import { Icon } from '../../shared/ui/icon';
       list-style: disc;
     }
     .legal :where(a) {
-      color: var(--pf-accent-deep);
+      color: color-mix(
+        in srgb,
+        var(--pf-accent-deep) 72%,
+        black
+      ); /* dunkler: kleiner Text braucht mehr Kontrast */
       text-decoration: underline;
       text-underline-offset: 3px;
     }

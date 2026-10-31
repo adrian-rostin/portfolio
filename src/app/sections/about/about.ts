@@ -131,7 +131,7 @@ export class About {
       // helle Flächen) zum Akzent des Tech-Stacks.
       const LIGHT = [241, 235, 226]; // --pf-ink
       const DARK = [23, 21, 18]; // --pf-paper
-      const ACCENT_ON_LIGHT = [102, 160, 150]; // --pf-accent-deep
+      const ACCENT_ON_LIGHT = [79, 138, 128]; // --pf-accent-deep
       const ACCENT_ON_DARK = [0, 184, 162]; // --pf-accent
       // Start, während der Satz noch steht; Wechsel der Schrift ist fertig, bevor der Tech-Stack auftaucht
       const BG_FROM = -0.1; // Bildschirmhöhen relativ zum Lösepunkt (kurz davor, während der Pause)
@@ -146,6 +146,13 @@ export class About {
       const root = doc.documentElement;
       let lastBg = '';
       const updateBackground = (rTop: number, vh: number) => {
+        // Abschnitt noch ganz unterhalb des Bildschirms: Bereich darunter behält seinen dunklen Grund
+        // (sonst stünde der Tech-Stack bis zum ersten Scrollen auf hellem Grund, z. B. für Prüftools)
+        if (rTop >= vh) {
+          if (lastBg !== 'off') root.style.removeProperty('--after-about-bg');
+          lastBg = 'off';
+          return;
+        }
         const scrolled = (releaseAt(vh) - rTop) / vh; // Scrollweg seit dem Lösepunkt
         const k = curve(clamp((scrolled - BG_FROM) / BG_SPAN));
         const bg = mix(LIGHT, DARK, k);

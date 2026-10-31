@@ -13,7 +13,7 @@
   --pf-accent: #00b8a2; /* Akzent auf dunklem Grund (Türkis) */
   --pf-accent-soft: #35342c; /* gedämpfte Akzentfläche (Scheibe, Chips) */
   /* Akzent auf hellen Flächen (genug Kontrast auf Creme) */
-  --pf-accent-deep: #66a096; /* gedecktes Petrol */
+  --pf-accent-deep: #4f8a80; /* gedecktes Petrol */
   --pf-on-accent: #171512;
   color-scheme: dark;
 }
