@@ -30,10 +30,10 @@ import { legal } from '../../data/portfolio.data';
 
       <h2>Haftung für Links</h2>
       <p>
-        Diese Website enthält Links zu externen Websites (z. B. LinkedIn). Auf deren Inhalte habe
-        ich keinen Einfluss; für sie ist der jeweilige Anbieter verantwortlich. Zum Zeitpunkt der
-        Verlinkung waren keine Rechtsverstöße erkennbar. Sollte mir eine Rechtsverletzung bekannt
-        werden, entferne ich den Link umgehend.
+        Diese Website enthält Links zu externen Websites (LinkedIn, GitHub und Xing). Auf deren
+        Inhalte habe ich keinen Einfluss; für sie ist der jeweilige Anbieter verantwortlich. Zum
+        Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Sollte mir eine
+        Rechtsverletzung bekannt werden, entferne ich den Link umgehend.
       </p>
 
       <h2>Urheberrecht</h2>
@@ -44,10 +44,10 @@ import { legal } from '../../data/portfolio.data';
 
       <h2>Marken und Logos</h2>
       <p>
-        Die im Tech-Stack genannten Namen und gezeigten Logos sind Marken ihrer jeweiligen Inhaber.
-        Sie dienen hier ausschließlich dazu, die Technologien zu benennen, mit denen ich arbeite. Es
-        besteht keine Verbindung zu den Markeninhabern; sie unterstützen oder empfehlen diese
-        Website nicht.
+        Die im Tech-Stack und bei den Profil-Links genannten Namen und gezeigten Logos sind Marken
+        ihrer jeweiligen Inhaber. Sie dienen hier ausschließlich dazu, die Technologien zu benennen,
+        mit denen ich arbeite, und auf meine Profile bei diesen Diensten zu verweisen. Es besteht
+        keine Verbindung zu den Markeninhabern; sie unterstützen oder empfehlen diese Website nicht.
       </p>
       <p>
         Java und JavaScript sind Marken von Oracle und/oder verbundenen Unternehmen. Python ist eine
@@ -55,7 +55,9 @@ import { legal } from '../../data/portfolio.data';
         der Linux Foundation. Docker ist eine Marke von Docker, Inc. Spring ist eine Marke von
         Broadcom Inc. und/oder ihren Tochtergesellschaften. TypeScript ist eine Marke der Microsoft
         Corporation. Angular und Go sind Marken von Google LLC. React ist eine Marke von Meta
-        Platforms, Inc. Git ist eine Marke der Software Freedom Conservancy.
+        Platforms, Inc. Git ist eine Marke der Software Freedom Conservancy. GitHub ist eine Marke
+        von GitHub, Inc. LinkedIn ist eine Marke der LinkedIn Corporation. XING ist eine Marke der
+        New Work SE.
       </p>
       <p>
         Lizenzhinweise: Git-Logo von Jason Long, lizenziert unter
@@ -66,7 +68,9 @@ import { legal } from '../../data/portfolio.data';
           >CC BY 4.0</a
         >. Logo-Grafiken aus
         <a href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</a> (CC0) und
-        <a href="https://devicon.dev" target="_blank" rel="noopener">Devicon</a> (MIT).
+        <a href="https://devicon.dev" target="_blank" rel="noopener">Devicon</a> (MIT) sowie das
+        GitHub-Logo aus
+        <a href="https://primer.style/octicons" target="_blank" rel="noopener">Octicons</a> (MIT).
       </p>
     </app-legal-layout>
   `,

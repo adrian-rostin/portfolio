@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Icon } from '../../shared/ui/icon';
-import { profile, skills } from '../../data/portfolio.data';
+import { profile, profileLinks, skills } from '../../data/portfolio.data';
 
 /** Die Skills aus dem Tech-Stack, auf zwei große Schriftzeilen verteilt. */
 function skillLines(): string[][] {
@@ -224,12 +224,17 @@ function skillLines(): string[][] {
                 <a class="btn btn-primary btn-mail" [href]="'mailto:' + profile.email">
                   <app-icon name="envelope" class="mail-icon size-4" />E-Mail
                 </a>
-                <a class="btn" [href]="profile.linkedin" target="_blank" rel="noopener">
-                  <app-icon name="arrow-up-right" class="size-4" />LinkedIn
-                </a>
-                @if (profile.xing) {
-                  <a class="btn" [href]="profile.xing" target="_blank" rel="noopener">
-                    <app-icon name="arrow-up-right" class="size-4" />Xing
+                <!-- Profile nur als runde Logo-Knöpfe, damit der Blick bei der E-Mail bleibt -->
+                @for (p of profiles; track p.icon) {
+                  <a
+                    class="btn w-11 justify-center px-0"
+                    [href]="p.url"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <app-icon [name]="p.icon" class="size-[18px]" /><span class="sr-only">{{
+                      p.label
+                    }}</span>
                   </a>
                 }
               </div>
@@ -242,6 +247,7 @@ function skillLines(): string[][] {
 })
 export class Hero {
   protected readonly profile = profile;
+  protected readonly profiles = profileLinks;
   protected readonly lines = skillLines();
   protected readonly ready = signal(false);
   private readonly stage = viewChild.required<ElementRef<HTMLElement>>('stage');

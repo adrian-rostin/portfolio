@@ -102,9 +102,11 @@ import { legal, site } from '../../data/portfolio.data';
 
       <h2>6. Externe Links</h2>
       <p>
-        Die Website enthält Links zu externen Angeboten (z. B. LinkedIn). Erst wenn du einen solchen
-        Link anklickst, verlässt du diese Website; für die Datenverarbeitung dort ist der jeweilige
-        Anbieter verantwortlich.
+        Die Website enthält Links zu meinen Profilen bei LinkedIn, GitHub und Xing. Die Logos dieser
+        Dienste liegen auf meinem eigenen Server; beim Aufruf dieser Website werden deshalb keine
+        Daten an LinkedIn, GitHub oder Xing übertragen. Erst wenn du einen solchen Link anklickst,
+        verlässt du diese Website; für die Datenverarbeitung dort ist der jeweilige Anbieter
+        verantwortlich.
       </p>
 
       <h2>7. SSL-/TLS-Verschlüsselung</h2>

@@ -30,14 +30,10 @@ export const profile = {
   role: 'Software Engineer',
   location: 'Wiesbaden, Deutschland',
   email: 'mail@adrianrostin.de',
-  /** Leer = GitHub wird nirgends angezeigt. Später einfach den Profil-Link eintragen. */
-  github: '',
+  /** Profil-Links; ein leerer Eintrag blendet den Knopf überall aus. */
+  github: 'https://github.com/adrian-rostin',
   linkedin: 'https://www.linkedin.com/in/adrian-rostin',
-  /**
-   * Leer = Xing wird nirgends angezeigt. Eintragen, sobald das Profil gefüllt ist:
-   * 'https://www.xing.com/profile/Adrian_Rostin'
-   */
-  xing: '',
+  xing: 'https://www.xing.com/profile/Adrian_Rostin',
   /** Freigestelltes Porträt (transparenter Hintergrund). */
   portrait: '/images/portrait.webp',
   /**
@@ -61,6 +57,13 @@ export const profile = {
     'Ich entwickle Backend-Services und APIs, die zuverlässig laufen. Vom ersten Commit bis zum Deployment in Kubernetes.',
   statementAccent: ['zuverlässig', 'Kubernetes.'],
 };
+
+/** Profil-Knöpfe (Hero, Kontakt, Fußzeile) mit dem Logo des jeweiligen Dienstes; leere Links fallen weg. */
+export const profileLinks = [
+  { label: 'LinkedIn', icon: 'linkedin', url: profile.linkedin },
+  { label: 'GitHub', icon: 'github', url: profile.github },
+  { label: 'Xing', icon: 'xing', url: profile.xing },
+].filter((p) => p.url);
 
 /** Tech-Stack: erst der Schwerpunkt, dann der Rest. Logos siehe tech-logos.ts. */
 export const skills: { focus: Skill[]; more: Skill[] } = {

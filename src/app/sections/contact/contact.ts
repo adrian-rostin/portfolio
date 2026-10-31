@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/ui/icon';
-import { nav, profile } from '../../data/portfolio.data';
+import { nav, profile, profileLinks } from '../../data/portfolio.data';
 
 @Component({
   selector: 'app-contact',
@@ -26,6 +26,16 @@ import { nav, profile } from '../../data/portfolio.data';
             <!-- Eigenes Element: Cloudflare verschlüsselt die Adresse hier gegen Spam-Bots -->
             <span>{{ profile.email }}</span>
           </a>
+          @for (p of profiles; track p.icon) {
+            <a
+              class="btn h-14 border-paper/30 px-6 text-base text-paper hover:border-paper hover:bg-paper/5"
+              [href]="p.url"
+              target="_blank"
+              rel="noopener"
+            >
+              <app-icon [name]="p.icon" class="size-5" />{{ p.label }}
+            </a>
+          }
         </div>
 
         <div class="grid gap-8 border-t border-paper/25 py-8 sm:grid-cols-3">
@@ -47,34 +57,14 @@ import { nav, profile } from '../../data/portfolio.data';
           <div>
             <h4 class="label mb-2 opacity-70">Profile</h4>
             <ul class="m-0 list-none p-0">
-              @if (profile.github) {
+              @for (p of profiles; track p.icon) {
                 <li>
                   <a
-                    [href]="profile.github"
+                    [href]="p.url"
                     target="_blank"
                     rel="noopener"
                     class="inline-flex items-center gap-2 leading-[30px] hover:underline hover:underline-offset-4"
-                    ><app-icon name="github" class="size-4" />GitHub</a
-                  >
-                </li>
-              }
-              <li>
-                <a
-                  [href]="profile.linkedin"
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-flex items-center gap-2 leading-[30px] hover:underline hover:underline-offset-4"
-                  ><app-icon name="arrow-up-right" class="size-4" />LinkedIn</a
-                >
-              </li>
-              @if (profile.xing) {
-                <li>
-                  <a
-                    [href]="profile.xing"
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-2 leading-[30px] hover:underline hover:underline-offset-4"
-                    ><app-icon name="arrow-up-right" class="size-4" />Xing</a
+                    ><app-icon [name]="p.icon" class="size-4" />{{ p.label }}</a
                   >
                 </li>
               }
@@ -101,6 +91,7 @@ import { nav, profile } from '../../data/portfolio.data';
 })
 export class Contact {
   protected readonly profile = profile;
+  protected readonly profiles = profileLinks;
   protected readonly nav = nav;
   protected readonly year = new Date().getFullYear();
 }
