@@ -97,7 +97,7 @@ export const legal = {
     name: 'Der Hessische Beauftragte für Datenschutz und Informationsfreiheit',
     url: 'https://datenschutz.hessen.de',
   },
-  updated: 'Oktober 2026',
+  updated: 'November 2026',
 };
 
 export const nav = [
