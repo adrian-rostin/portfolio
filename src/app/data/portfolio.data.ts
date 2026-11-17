@@ -85,21 +85,6 @@ export const skills: { focus: Skill[]; more: Skill[] } = {
   ],
 };
 
-/** Angaben für Impressum und Datenschutzerklärung. */
-export const legal = {
-  name: 'Adrian Rostin',
-  street: 'Klosterbergweg 8',
-  city: '65399 Kiedrich',
-  country: 'Deutschland',
-  email: 'mail@adrianrostin.de',
-  /** Zuständige Datenschutz-Aufsichtsbehörde (Wohnsitz in Hessen). */
-  authority: {
-    name: 'Der Hessische Beauftragte für Datenschutz und Informationsfreiheit',
-    url: 'https://datenschutz.hessen.de',
-  },
-  updated: 'November 2026',
-};
-
 export const nav = [
   { label: 'Über mich', fragment: 'ueber-mich' },
   { label: 'Skills', fragment: 'skills' },

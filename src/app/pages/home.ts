@@ -24,7 +24,6 @@ import { Contact } from '../sections/contact/contact';
 })
 export class Home {
   constructor() {
-    // Titel wieder setzen, wenn man von Impressum/Datenschutz zurückkommt
     inject(Title).setTitle(site.title);
   }
 }

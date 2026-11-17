@@ -81,8 +81,8 @@ import { nav, profile, profileLinks } from '../../data/portfolio.data';
         <div class="flex flex-wrap justify-between gap-4 text-[13px] opacity-70">
           <span>© {{ year }} {{ profile.firstName }} {{ profile.lastName }}</span>
           <span
-            ><a routerLink="/impressum" class="hover:underline">Impressum</a> ·
-            <a routerLink="/datenschutz" class="hover:underline">Datenschutz</a></span
+            ><a href="/impressum" class="hover:underline">Impressum</a> ·
+            <a href="/datenschutz" class="hover:underline">Datenschutz</a></span
           >
         </div>
       </div>
