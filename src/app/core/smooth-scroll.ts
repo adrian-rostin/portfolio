@@ -26,6 +26,18 @@ export class SmoothScroll {
     }
     this.doc.defaultView?.scrollTo({ top, behavior: immediate ? 'instant' : 'smooth' });
   }
+
+  /** Scrollen anhalten (z. B. während ein Fenster offen ist). Ohne Lenis als Fallback overflow sperren. */
+  stop(): void {
+    if (this.lenis) this.lenis.stop();
+    else this.doc.documentElement.style.overflow = 'hidden';
+  }
+
+  /** Scrollen wieder freigeben. */
+  resume(): void {
+    if (this.lenis) this.lenis.start();
+    else this.doc.documentElement.style.removeProperty('overflow');
+  }
 }
 
 /**
