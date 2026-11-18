@@ -219,7 +219,8 @@ export const projects: Project[] = [
     id: 'monitoring',
     index: '02',
     name: 'Cluster-Monitoring',
-    tagline: 'Monitoring für meinen Cluster: Metriken, Logs, Dashboards und Alerts, alles als Code.',
+    tagline:
+      'Monitoring für meinen Cluster: Metriken, Logs, Dashboards und Alerts, alles als Code.',
     hero: {
       src: '/images/projects/monitoring-overview.webp',
       alt: 'Grafana-Dashboard der Altsetter-API: Verfügbarkeit, Requests/s, Latenz und Status.',
@@ -275,7 +276,11 @@ export const projects: Project[] = [
       { label: 'Betrieb', items: ['Kubernetes'] },
     ],
     links: [
-      { label: 'Repository', url: 'https://github.com/adrian-rostin/cluster-monitoring', icon: 'github' },
+      {
+        label: 'Repository',
+        url: 'https://github.com/adrian-rostin/cluster-monitoring',
+        icon: 'github',
+      },
     ],
   },
 ];
