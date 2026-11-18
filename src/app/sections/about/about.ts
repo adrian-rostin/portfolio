@@ -124,48 +124,10 @@ export class About {
       pane.style.left = '0';
       pane.style.right = '0';
 
-      // Hintergrund wechselt beim Weiterscrollen langsam von hell (Über mich) zu dunkel (Tech-Stack).
-      // Fläche und der Bereich darunter (--after-about-bg, siehe styles.css) bekommen dieselbe Farbe,
-      // so gibt es keine sichtbare Kante, wenn die Fläche wegscrollt.
-      // Die Schrift wechselt mit: dunkel auf hell, hell auf dunkel – Akzent vom dunklen Ton (für
-      // helle Flächen) zum Akzent des Tech-Stacks.
-      const LIGHT = [241, 235, 226]; // --pf-ink
-      const DARK = [23, 21, 18]; // --pf-paper
-      const ACCENT_ON_LIGHT = [79, 138, 128]; // --pf-accent-deep
-      const ACCENT_ON_DARK = [0, 184, 162]; // --pf-accent
-      // Start, während der Satz noch steht; Wechsel der Schrift ist fertig, bevor der Tech-Stack auftaucht
-      const BG_FROM = -0.1; // Bildschirmhöhen relativ zum Lösepunkt (kurz davor, während der Pause)
-      const BG_SPAN = 0.6; // über so viele Bildschirmhöhen Scrollweg
-      // Verlauf: an beiden Enden langsam, durch die Mitte zügiger – dort, wo Schrift und Grund gleich
-      // hell wären, soll man sich nur kurz aufhalten.
-      const STEEP = 5;
-      const curve = (t: number) =>
-        0.5 + (0.5 * Math.tanh((t - 0.5) * STEEP)) / Math.tanh(0.5 * STEEP);
-      const mix = (a: number[], b: number[], k: number) =>
-        `rgb(${a.map((c, i) => Math.round(c + (b[i] - c) * k)).join(' ')})`;
+      // „Über mich“ bleibt hell (Creme), die Schrift dunkel. Den Wechsel von Hell nach Dunkel
+      // übernimmt jetzt der Abschnitt „Projekte“ darunter: projects.ts setzt --after-about-bg beim
+      // seitlichen Scrollen von Creme bis ins Dunkle. So erscheint das erste Projekt noch auf Weiß.
       const root = doc.documentElement;
-      let lastBg = '';
-      const updateBackground = (rTop: number, vh: number) => {
-        // Abschnitt noch ganz unterhalb des Bildschirms: Bereich darunter behält seinen dunklen Grund
-        // (sonst stünde der Tech-Stack bis zum ersten Scrollen auf hellem Grund, z. B. für Prüftools)
-        if (rTop >= vh) {
-          if (lastBg !== 'off') root.style.removeProperty('--after-about-bg');
-          lastBg = 'off';
-          return;
-        }
-        const scrolled = (releaseAt(vh) - rTop) / vh; // Scrollweg seit dem Lösepunkt
-        const k = curve(clamp((scrolled - BG_FROM) / BG_SPAN));
-        const bg = mix(LIGHT, DARK, k);
-        if (bg === lastBg) return;
-        lastBg = bg;
-        // Schrift springt an der Mitte um (mit kurzer CSS-Überblendung) statt stufenlos mitzulaufen –
-        // so gibt es keine Scrollposition, an der Schrift und Grund gleich hell sind
-        const f = k >= 0.5 ? 1 : 0;
-        pane.style.backgroundColor = bg;
-        pane.style.setProperty('--about-fg', mix(DARK, LIGHT, f));
-        pane.style.setProperty('--about-accent', mix(ACCENT_ON_LIGHT, ACCENT_ON_DARK, f));
-        root.style.setProperty('--after-about-bg', bg);
-      };
 
       const render = (dt: number) => {
         const vh = win.innerHeight;
@@ -223,18 +185,15 @@ export class About {
         const r = stage.getBoundingClientRect();
         const vh = win.innerHeight;
         const near = r.bottom > -vh * 1.5 && r.top < vh * 1.5;
-        updateBackground(r.top, vh); // immer, auch nach Sprüngen weit weg
         // Ist die Fläche noch sichtbar, immer nachziehen – sonst bliebe sie nach einem Sprung weg vom
         // Abschnitt über allem stehen.
         if (near || pane.style.visibility !== 'hidden') render(dt);
       };
       root.classList.add('about-animated'); // Abstand unter der Fläche (styles.css)
       render(0);
-      updateBackground(stage.getBoundingClientRect().top, win.innerHeight);
       raf = win.requestAnimationFrame(loop);
       destroyRef.onDestroy(() => {
         win.cancelAnimationFrame(raf);
-        root.style.removeProperty('--after-about-bg');
         root.classList.remove('about-animated');
       });
     });
