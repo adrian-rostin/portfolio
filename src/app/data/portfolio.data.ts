@@ -148,7 +148,7 @@ export const projects: Project[] = [
     tagline: 'Übungsfinder fürs Gym: Muskel am 3D-Körper antippen, passende Übung finden.',
     hero: {
       src: '/images/projects/altsetter-hero.webp',
-      alt: 'Altsetter: der anatomische 3D-Körper in der Dreiviertel-Ansicht.',
+      alt: 'Altsetter: der anatomische 3D-Körper mit markierter Brust und Schulter.',
     },
     images: [
       {
@@ -157,11 +157,11 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/altsetter-desktop.webp',
-        alt: 'Altsetter am Desktop: ausgewählter Muskel und Übung mit Tipps und häufigen Fehlern.',
+        alt: 'Altsetter am Desktop: ausgewählte Brust und das Übungsdetail Schrägbankdrücken mit Foto und Hinweisen.',
       },
       {
         src: '/images/projects/altsetter-exercises.webp',
-        alt: 'Altsetter: Brust ausgewählt, daneben die Übungsliste mit Tipps und Fehlern.',
+        alt: 'Altsetter: Übungsdetail Schrägbankdrücken mit Foto, Fokus-Muskel und Hinweisen.',
       },
       {
         src: '/images/projects/altsetter-mobile.webp',
@@ -188,7 +188,7 @@ export const projects: Project[] = [
       },
       {
         src: '/images/projects/alt-card.webp',
-        alt: 'Übungskarte „Cable Flys auf der Schrägbank“ mit Tipps.',
+        alt: 'Übungskarte „Schrägbankdrücken mit der Langhantel“ mit Foto.',
         caption: 'Übungskarte',
       },
     ],
