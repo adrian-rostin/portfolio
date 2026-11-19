@@ -147,47 +147,47 @@ export const projects: Project[] = [
     name: 'Altsetter',
     tagline: 'Übungsfinder fürs Gym: Muskel am 3D-Körper antippen, passende Übung finden.',
     hero: {
-      src: '/images/projects/altsetter-hero.webp',
+      src: '/images/projects/altsetter-hero-v2.webp',
       alt: 'Altsetter: der anatomische 3D-Körper mit markierter Brust und Schulter.',
     },
     images: [
       {
-        src: '/images/projects/altsetter-3d.webp',
+        src: '/images/projects/altsetter-3d-v2.webp',
         alt: 'Altsetter: anatomischer 3D-Körper mit allen Muskeln, frei drehbar.',
       },
       {
-        src: '/images/projects/altsetter-desktop.webp',
+        src: '/images/projects/altsetter-desktop-v2.webp',
         alt: 'Altsetter am Desktop: ausgewählte Brust und das Übungsdetail Schrägbankdrücken mit Foto und Hinweisen.',
       },
       {
-        src: '/images/projects/altsetter-exercises.webp',
+        src: '/images/projects/altsetter-exercises-v2.webp',
         alt: 'Altsetter: Übungsdetail Schrägbankdrücken mit Foto, Fokus-Muskel und Hinweisen.',
       },
       {
-        src: '/images/projects/altsetter-mobile.webp',
+        src: '/images/projects/altsetter-mobile-v2.webp',
         alt: 'Altsetter am Handy: ausgewählte Schulter mit der Übungsliste als Panel.',
         shape: 'phone',
       },
     ],
     cluster: [
       {
-        src: '/images/projects/altsetter-3d.webp',
+        src: '/images/projects/altsetter-3d-v2.webp',
         alt: 'Anatomischer 3D-Körper mit allen Muskeln.',
         caption: '3D-Körper',
       },
       {
-        src: '/images/projects/altsetter-mobile.webp',
+        src: '/images/projects/altsetter-mobile-v2.webp',
         alt: 'Altsetter am Handy mit ausgewähltem Muskel.',
         shape: 'phone',
         caption: 'Mobile Ansicht',
       },
       {
-        src: '/images/projects/altsetter-desktop.webp',
+        src: '/images/projects/altsetter-desktop-v2.webp',
         alt: 'Altsetter am Desktop.',
         caption: 'Am Desktop',
       },
       {
-        src: '/images/projects/alt-card.webp',
+        src: '/images/projects/alt-card-v2.webp',
         alt: 'Übungskarte „Schrägbankdrücken mit der Langhantel“ mit Foto.',
         caption: 'Übungskarte',
       },
